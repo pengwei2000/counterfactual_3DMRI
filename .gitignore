@@ -1,0 +1,13 @@
+__pycache__/
+*.png
+*.tif
+*.xlsx
+*.pptx
+*.npz
+*.pgm
+/plot/
+*.txt
+*.pth
+*.ckpt
+models/ha-gan/checkpoint/
+methods/deepscm3d/checkpoints/

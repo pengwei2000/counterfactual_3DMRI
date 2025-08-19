@@ -1,0 +1,157 @@
+{
+    "causal_graph": {
+        "age": [],
+        "sex": [],
+        "diagnosis": ["age"],
+        "fro": ["age", "sex", "diagnosis"],
+        "par": ["age", "sex", "diagnosis"],
+        "tem": ["age", "sex", "diagnosis"],
+        "occ": ["age", "sex", "diagnosis"],
+        "cin": ["age", "sex", "diagnosis"],
+        "ins": ["age", "sex", "diagnosis"],
+        "ven": ["age", "diagnosis"],
+        "image": ["fro","par","tem","occ","cin","ins","ven"]
+    },
+    "attribute_size": {
+        "age": 1,
+        "sex": 2,
+        "diagnosis": 5,
+        "fro": 1,
+        "par": 1,
+        "tem": 1,
+        "occ": 1,
+        "cin": 1,
+        "ins": 1,
+        "ven": 1
+    },
+    "mechanism_models": {
+        "diagnosis": {
+            "model_type": "flow",
+            "model_class": "DiagFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.001,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 10,
+                "max_epochs" : 1000
+            }
+        },
+        "fro": {
+            "model_type": "flow",
+            "model_class": "FroFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.001,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 10,
+                "max_epochs" : 1000
+            }
+        },
+        "par": {
+            "model_type": "flow",
+            "model_class": "ParFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "tem": {
+            "model_type": "flow",
+            "model_class": "TemFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "occ": {
+            "model_type": "flow",
+            "model_class": "OccFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "cin": {
+            "model_type": "flow",
+            "model_class": "CinFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "ins": {
+            "model_type": "flow",
+            "model_class": "InsFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "ven": {
+            "model_type": "flow",
+            "model_class": "VenFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "image": {
+            "model_type": "vae",
+            "model_class": "ADNI3dCondVAE",
+            "module": "models.vaes",
+            "params": {
+                "version" : "heavy",
+                "latent_dim" : 32,
+                "hidden_dim": 512,
+                "context_dim": 7,
+                "beta" : 3000,
+                "lr" : 1e-3,
+                "gradient_clip_val": 350,
+                "batch_size_train" : 16,
+                "batch_size_val" : 16,
+                "patience" : 100,
+                "max_epochs" : 300,
+                "train_val_split" : 0.9,
+                "weight_decay": 0.0,
+                "ema": "True",
+                "fixed_logvar": "False"
+            }
+        }
+    },
+"dataset": "adni3d",
+"checkpoint_dir": "./checkpoints/adni/trained_scm"
+}

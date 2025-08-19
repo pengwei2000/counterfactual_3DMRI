@@ -1,0 +1,155 @@
+{
+    "causal_graph": {
+        "age": [],
+        "sex": [],
+        "diagnosis": ["age", "sex"],
+        "fro": ["age", "sex", "diagnosis"],
+        "par": ["age", "sex", "diagnosis"],
+        "tem": ["age", "sex", "diagnosis"],
+        "occ": ["age", "sex", "diagnosis"],
+        "cin": ["age", "sex", "diagnosis"],
+        "ins": ["age", "sex", "diagnosis"],
+        "ven": ["age", "diagnosis"],
+        "image": ["fro","par","tem","occ","cin","ins","ven"]
+    },
+    "attribute_size": {
+        "age": 1,
+        "sex": 2,
+        "diagnosis":4,
+        "fro": 1,
+        "par": 1,
+        "tem": 1,
+        "occ": 1,
+        "cin": 1,
+        "ins": 1,
+        "ven": 1
+    },
+    "mechanism_models": {
+        "diagnosis": {
+            "model_type": "flow",
+            "model_class": "NCDiagFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.001,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 10,
+                "max_epochs" : 1000
+            }
+        },
+        "fro": {
+            "model_type": "flow",
+            "model_class": "NCFroFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.001,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 10,
+                "max_epochs" : 1000
+            }
+        },
+        "par": {
+            "model_type": "flow",
+            "model_class": "NCParFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "tem": {
+            "model_type": "flow",
+            "model_class": "NCTemFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "occ": {
+            "model_type": "flow",
+            "model_class": "NCOccFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "cin": {
+            "model_type": "flow",
+            "model_class": "NCCinFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "ins": {
+            "model_type": "flow",
+            "model_class": "NCInsFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "ven": {
+            "model_type": "flow",
+            "model_class": "NCVenFlow",
+            "module": "models.flows",
+            "params": {
+                "layers": 10,
+                "lr": 0.004,
+                "batch_size_train" : 64,
+                "batch_size_val" : 10000,
+                "patience" : 20,
+                "max_epochs" : 1000
+            }
+        },
+        "image": {
+            "model_type": "gan",
+            "model_class": "ADNICondGAN",
+            "module": "models.gans",
+            "params": {
+                "latent_dim": 512,
+                "kernel_size": 3,
+                "input_size": [144,176,144],
+                "initial_filters": 32,
+                "d_updates_per_g_update": 1,
+                "gradient_clip_val": 0.5,
+                "finetune": 1,
+                "pretrained_path": "./checkpoints/adni/trained_scm/image_gan_finetuned-epoch=24-val_loss=0.000-batch_size=2.ckpt",
+                "lr": 5e-6,
+                "batch_size_train": 2,
+                "batch_size_val": 2,
+                "patience": 1,
+                "max_epochs": 1
+            }
+        }
+    },
+"dataset": "ncanda",
+"checkpoint_dir": "./checkpoints/adni/trained_scm"
+}
